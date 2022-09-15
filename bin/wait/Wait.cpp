@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include "Wait.h"
+#include <sys/wait.h> // add this line to use waitpid()
 
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
