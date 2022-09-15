@@ -13,8 +13,8 @@
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
-    parser().setDescription("Stop executing for some time");
-    parser().registerPositional("SECONDS", "Stop executing for the given number of seconds");
+    parser().setDescription("Wait for a specific process to be done");
+    parser().registerPositional("PID's ID", "Wait for process with given ID to be done");
 }
 
 /* Destructor */
