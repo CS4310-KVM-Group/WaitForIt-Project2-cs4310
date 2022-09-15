@@ -22,21 +22,15 @@ Wait::~Wait() {}
 
 Wait::Result Wait::exec()
 {
-    int sec = 0;
+    // verify valid existing pid ID from terminal
+    int pid = 0; // parse from terminal
+    int *status = 0; // where to get this status?
 
-    // Convert input to seconds
-    if ((sec = atoi(arguments().get("SECONDS"))) <= 0)
-    {
-        ERROR("invalid Wait time `" << arguments().get("SECONDS") << "'");
-        return InvalidArgument;
-    }
 
-    // Wait now
-    if (wait(sec) != 0)
-    {
-        ERROR("failed to Wait: " << strerror(errno));
-        return IOError;
-    }
+    // calling waitpid() function to wait for that pid
+    waitpid(pid, status, 0);
+
+
 
     // Done
     return Success;
