@@ -9,7 +9,6 @@
 #include <unistd.h>
 #include "Wait.h"
 #include <sys/wait.h> // add this line to use waitpid()
-#include <iostream>
 
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
@@ -27,7 +26,7 @@ Wait::Result Wait::exec()
     int pid = 0; // parse from terminal
     //int *status = 0; // where to get this status?
 
-    cout << pid
+    out << pid;
 
 
     // calling waitpid() function to wait for that pid
