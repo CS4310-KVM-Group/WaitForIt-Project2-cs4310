@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
 #include <unistd.h>
+#include <errno.h>
+#include <sys/wait.h> 
 #include "Wait.h"
 
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
-    parser().setDescription("Wait for a given number of time before continuing operations.")
-    parser().registerPositional("SECONDS", "Wait for a given number of time before continuing operations.")
+    parser().setDescription("Wait for a specific process to be done.")
+    parser().registerPositional("PID", "Wait for process with given ID to be done.")
 }
 
 Wait::~Wait()
@@ -18,21 +19,12 @@ Wait::~Wait()
 
 Wait::Result Wait::exec()
 {
-    int sec = 0;
+    int pid = 0
+    int *status = 0;
 
-    // Convert input to seconds
-    if((sec = atoi(arguments().get("SECONDS"))) <=0)
-    {
-        ERROR("invalid wait time `" << arguments().get("SECONDS") << "'");
-        return InvalidArgument;
-    }
+    pid = atoi(arguments().get("PID"));
 
-    //Wait now
-    if (wait(sec) != 0)
-    {
-        ERROR("failed to wait: " << strerror(errno));
-        return IOError;
-    }
+    waitpid(pid, status, 0);
 
     //Done
     return Success;
