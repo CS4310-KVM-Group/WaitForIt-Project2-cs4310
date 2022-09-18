@@ -14,7 +14,7 @@ Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Wait for a specific process to be done");
-    parser().registerPositional("PID's ID", "Wait for process with given ID to be done");
+    parser().registerPositional("PID", "Wait for process with given ID to be done");
 }
 
 /* Destructor */
@@ -24,7 +24,7 @@ Wait::Result Wait::exec()
 {
     // verify valid existing pid ID from terminal
     int pid = 0; // parse from terminal
-    pid = atoi(arguments())
+    pid = atoi(arguments().get("PID"))
 
     //int *status = 0; // where to get this status?
 
