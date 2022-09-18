@@ -22,20 +22,18 @@ Wait::~Wait() {}
 
 Wait::Result Wait::exec()
 {
-    // verify valid existing pid ID from terminal
-    int pid = 0; // parse from terminal
+    // Initialize variables
+    int pid = 0;
     int status;
-
+    
+    // Convert Pid string from arg to int
     pid = atoi(arguments().get("PID"));
 
-    //int *status = 0; // where to get this status?
-
-    printf("Pid = %d\n", pid);
+    // DEBUG
+    //printf("Pid = %d\n", pid);
 
     // calling waitpid() function to wait for that pid
     waitpid(pid, &status, 0);
-
-
 
     // Done
     return Success;
