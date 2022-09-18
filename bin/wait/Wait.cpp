@@ -24,15 +24,16 @@ Wait::Result Wait::exec()
 {
     // verify valid existing pid ID from terminal
     int pid = 0; // parse from terminal
+    int status;
+
     pid = atoi(arguments().get("PID"));
 
     //int *status = 0; // where to get this status?
 
     printf("Pid = %d\n", pid);
 
-
     // calling waitpid() function to wait for that pid
-    waitpid(pid, status, 0);
+    waitpid(pid, &status, 0);
 
 
 
