@@ -26,7 +26,7 @@ Wait::Result Wait::exec()
     int pid = 0; // parse from terminal
     //int *status = 0; // where to get this status?
 
-    out << pid;
+    printf(pid);
 
 
     // calling waitpid() function to wait for that pid
