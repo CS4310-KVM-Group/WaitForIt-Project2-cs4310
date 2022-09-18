@@ -24,7 +24,7 @@ Wait::Result Wait::exec()
 {
     // verify valid existing pid ID from terminal
     int pid = 0; // parse from terminal
-    pid = atoi(arguments().get("PID"))
+    pid = atoi(arguments().get("PID"));
 
     //int *status = 0; // where to get this status?
 
