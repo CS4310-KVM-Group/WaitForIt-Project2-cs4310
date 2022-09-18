@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include "Wait.h"
 #include <sys/wait.h> // add this line to use waitpid()
+#include <iostream>
 
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
