@@ -32,7 +32,7 @@ Wait::Result Wait::exec()
 
 
     // calling waitpid() function to wait for that pid
-    //waitpid(pid, status, 0);
+    waitpid(pid, status, 0);
 
 
 
