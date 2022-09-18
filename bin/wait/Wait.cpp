@@ -24,11 +24,13 @@ Wait::Result Wait::exec()
 {
     // verify valid existing pid ID from terminal
     int pid = 0; // parse from terminal
-    int *status = 0; // where to get this status?
+    //int *status = 0; // where to get this status?
+
+    cout << pid
 
 
     // calling waitpid() function to wait for that pid
-    waitpid(pid, status, 0);
+    //waitpid(pid, status, 0);
 
 
 
