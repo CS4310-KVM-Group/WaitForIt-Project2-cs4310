@@ -29,7 +29,7 @@ Wait::Result Wait::exec()
     // And avoiding folders default processes from 1-16
     if( (pid = atoi(arguments().get("PID"))) < 17)
     {
-        ERROR("failed to wait: Invalid argument" << arguments().get("PID") << "'");
+        ERROR("failed to wait: Invalid argument '" << arguments().get("PID") << "'");
         return InvalidArgument;
     }
 
@@ -37,7 +37,7 @@ Wait::Result Wait::exec()
     // And if PID is not successful (status is not changing) throws error msg
     if(waitpid(pid, &status, 0) == -1)
     {
-        ERROR("failed to wait: " << sterror(error));
+        ERROR("failed to wait: " << strerror(errno));
         return IOError;
     }
 
