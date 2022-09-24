@@ -1,6 +1,18 @@
-# Documentation
+# Project 2: Wait for it...
 
-## Background
+## 1. Group VKSos
+
+### Team members:
+
+- Van Huynh
+- Selenya Vargas
+- Kenny Santanu
+
+### Demo Video Link: [Click Here](https://www.youtube.com)
+
+<br>
+
+## 2. Background
 in Linux:
 ```
 $ sleep 30   (the kernel will suspend for 30 sec, can't do anything during this time)
@@ -12,12 +24,15 @@ $ sleep 30 & (a single process is sleeping in the background)
 $ wait 17 (wait the process with ID 17 to be done sleeping)
 ```
 
-## Approach
+## 3. Approach
 
 - parsing command line input
+- validate inputs
+    + validate valid user input from terminal
+    + validate existing PIDs
 - utilize waitpid() to wait for a PID
     + require a process ID
-- utilize sleep function??? (perhaps not since waitpid() is waiting for current sleeping pid already)
+    
 
 
 ## Resources
