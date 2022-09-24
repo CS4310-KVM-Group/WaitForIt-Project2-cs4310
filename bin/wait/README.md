@@ -8,7 +8,7 @@
 - Selenya Vargas
 - Kenny Santanu
 
-### Demo Video Link: [Click Here](https://www.youtube.com)
+### Demo Video Link: [Click Here](https://www.youtube.com/watch?v=xCxUk0Qo38c)
 
 <br>
 
