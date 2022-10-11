@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BIN_PS_PROCESSLIST_H
-#define __BIN_PS_PROCESSLIST_H
+#ifndef __BIN_RENICE_NICER_H
+#define __BIN_RENICE_NICER_H
 
 #include <POSIXApplication.h>
 
@@ -28,7 +28,7 @@
 /**
  * Output the system process list.
  */
-class ProcessList : public POSIXApplication
+class Nicer : public POSIXApplication
 {
   public:
 
@@ -38,7 +38,7 @@ class ProcessList : public POSIXApplication
      * @param argc Argument count
      * @param argv Argument values
      */
-    ProcessList(int argc, char **argv);
+    Nicer(int argc, char **argv);
 
     /**
      * Execute the application.
@@ -52,4 +52,4 @@ class ProcessList : public POSIXApplication
  * @}
  */
 
-#endif /* __BIN_PS_PROCESSLIST_H */
+#endif /* __BIN_RENICE_NICER_H */

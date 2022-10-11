@@ -20,15 +20,15 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <ProcessClient.h>
-#include "ProcessList.h"
+#include "Nicer.h"
 
-ProcessList::ProcessList(int argc, char **argv)
+Nicer::Nicer(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Output system process list");
 }
 
-ProcessList::Result ProcessList::exec()
+Nicer::Result Nicer::exec()
 {
     const ProcessClient process;
     String out;
