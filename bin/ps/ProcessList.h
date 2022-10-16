@@ -46,6 +46,17 @@ class ProcessList : public POSIXApplication
      * @return Result code
      */
     virtual Result exec();
+
+  private:
+
+    /** Program argument parser object */
+    ArgumentParser m_parser;
+
+    /** Parsed Arguments */
+    ArgumentContainer m_arguments;
+
+    /** Program version */
+    String m_version;
 };
 
 /**
