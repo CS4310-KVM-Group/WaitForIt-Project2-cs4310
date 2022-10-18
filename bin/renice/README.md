@@ -1,0 +1,54 @@
+# Project 3: Prioritize it...
+
+## 1. Group VKSos
+
+### Team members:
+
+- Van Huynh
+- Selenya Vargas
+- Kenny Santanu
+
+### Demo Video Link: [Click Here](https://www.youtube.com/watch?v=xCxUk0Qo38c)
+
+### Repo Link: [Click Here](https://github.com/CS4310-KVM-Group/WaitForIt-Project2-cs4310/tree/priority/bin/renice)
+
+<br>
+
+## 2. Background
+
+in FreeNos...
+
+```
+# sc 360 &    #this gives your around 1-minute running time.
+```
+```
+# sc 300 &   #this gives your around 0.5-minute running time.
+```
+```
+# ps –l #suppose the output has PID 17 for “sc 300”
+```
+```
+# renice –n 2 17 #tell Process 17 to be run at priority 2
+```
+```
+# ps –l # make sure the priority changes for “sc 300”
+```
+```
+# # wait to see that “sc 360” finish before “sc 300”
+```
+
+## 3. Approach
+
+- add -l flag for ps command to show priority of all current processes
+- add renice commands, given a specific process id (PID) --> change priority of specific process
+- implement priority queue of process
+    + setter function to change priority of process within a queue
+    + getter function to return priority of process
+    
+
+
+## Resources
+
+- [FreeNOS doxygen Kernel module](http://www.freenos.org/doxygen/group__kernel.html)
+- [FreeNOS doxygen Scheduler class](http://www.freenos.org/doxygen/classScheduler.html)
+- [FreeNOS doxygen Kernel  class](http://www.freenos.org/doxygen/classKernel.html#details)
