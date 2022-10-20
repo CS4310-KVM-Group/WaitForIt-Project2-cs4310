@@ -14,6 +14,34 @@
 
 <br>
 
+### File structure
+
+ProcessList class (ps command)
+        |
+        |
+        ProcessClient class:
+            - renice call ProcessClient?
+            - 
+                |
+                |
+                ProcessCtl class 
+                - Process point w/ default value 0 (involve Process Class)
+                - ProcessInfo struct pointer (involve ProcessInfo)
+                - ProcessManager pointer  (involve ProcessManager)
+                - case "Spawn"
+                - Spawn is in shell (which is in POSIXAPP)
+                        |
+                        |
+                        Process class
+                        - setPriority() function
+                        - getPriority() function
+
+Scheduler class (harder approach)
+
+
+
+
+
 ## 2. Background
 
 in FreeNos...
@@ -52,3 +80,4 @@ in FreeNos...
 - [FreeNOS doxygen Kernel module](http://www.freenos.org/doxygen/group__kernel.html)
 - [FreeNOS doxygen Scheduler class](http://www.freenos.org/doxygen/classScheduler.html)
 - [FreeNOS doxygen Kernel  class](http://www.freenos.org/doxygen/classKernel.html#details)
+- [FreeNOS doxygen Process Manager  class](http://www.freenos.org/doxygen/classProcessManager.html)

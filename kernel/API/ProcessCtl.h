@@ -70,6 +70,9 @@ typedef struct ProcessInfo
 
     /** Defines the current state of the Process. */
     Process::State state;
+
+    /* Priority value of a process. */
+    //Hello//
 }
 ProcessInfo;
 
@@ -109,7 +112,7 @@ inline API::Result ProcessCtl(const ProcessID proc,
  * @{
  */
 
-/**
+/** 
  * Kernel handler prototype. Process management related operations.
  *
  * @param proc Target Process' ID.
