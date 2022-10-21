@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\bin",
+    "\\bin\\renice"
   ],
-  "SelectedNode": "\\C:\\Users\\kenny\\Source\\Repos\\WaitForIt-Project2-cs4310",
+  "SelectedNode": "\\bin\\renice\\Nicer.h",
   "PreviewInSolutionExplorer": false
 }
