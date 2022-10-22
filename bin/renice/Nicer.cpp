@@ -33,7 +33,9 @@ Nicer::Nicer(int argc, char **argv)
     parser().registerPositional("PID", "The PID of the process we want to change");
 }
 
-
+/**VanComment: based on ProcessList.cpp, I think this should be 
+ * Nicer::Result getPrio(int pid, int* p)
+ */
 Nicer::getPrio(int pid, int* p)
 {
     errno = 0;
