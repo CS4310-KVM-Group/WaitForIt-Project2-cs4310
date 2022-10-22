@@ -85,9 +85,16 @@ int Process::getPriority()
 }
 
 /** Setter function for priority */
-void Process::setPriority(int newPriority)
+bool Process::setPriority(int newPriority)
 {
-    m_priority = newPriority;
+    // case input priority level is out of bound
+    if (newPriority < 1 or newPriority > 5) {
+        return false;
+    }
+    // Else
+    m_priority = (PriorityLevel)newPriority;
+    return true;
+}
 
 Process::State Process::getState() const
 {
