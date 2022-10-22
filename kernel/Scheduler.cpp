@@ -26,7 +26,10 @@ Scheduler::Scheduler()
 
 Size Scheduler::count() const
 {
-    return m_queue.count();
+    // return m_queue.count();
+    Size size;
+    size = m_queue_min.count() + m_queue_default.count() + m_queue_max.count();
+    return size;
 }
 
 Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
@@ -37,8 +40,20 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
         return InvalidArgument;
     }
 
-    m_queue.push(proc);
-    return Success;
+    // m_queue.push(proc);
+    // return Success;
+    int priority = proc->getPriority(); 
+    Scheduler::Result result; 
+    switch (priority)
+    {
+        case 1: m_queue_min.push(proc);     result = Success; break;
+        case 2: m_queue_lower.push(proc);   result = Success; break;
+        case 3: m_queue_default.push(proc); result = Success; break;
+        case 4: m_queue_higher.push(proc);  result = Success; break;
+        case 5: m_queue_max.push(proc);     result = Success; break;
+        // Else, just exit the switch block
+    }
+    return result;
 }
 
 Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
