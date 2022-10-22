@@ -27,6 +27,9 @@ ProcessList::ProcessList(int argc, char **argv)
 {
     parser().setDescription("Output system process list");
     parser().registerFlag('l', "list", "list priority level for all program");
+    
+    // Comment out this parser() code from Selly branch to fix merge conflict for flag -l
+    // parser().registerFlag('l', "PriorityLevel", "Display priority level processes")
 }
 
 ProcessList::Result ProcessList::exec()

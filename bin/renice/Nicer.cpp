@@ -20,43 +20,77 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <ProcessClient.h>
+#include <errno.h>
 #include "Nicer.h"
+
 
 Nicer::Nicer(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Output system process list");
+    parser().registerFlag('n', "priority", "Tell process to run at given priority");
+    parser().registerPositional("PRIO", "The priority of the process");
+    parser().registerPositional("PID", "The PID of the process we want to change");
+}
+
+
+Nicer::getPrio(int pid, int* p)
+{
+    errno = 0;
+    //Checks priority of pid and returns error if invalid
+    *p = getPriority(pid);
+    if (*p == -1 && errno)
+    {
+        WARNING("Failed to get priority");
+        return -errno;
+    }
+    return 0;
+}
+
+//Checks to see if priortiy need to be changed
+Nicer::doNice(int pid, int priority)
+{
+    //old and new priority
+    int oldp, newp;
+
+    //If getPriority does not return an error then we set priority
+    if (getPrio(pid, &oldp) != 0)
+        return 1;
+
+    //Sets priority and checks for error
+    if (setPriorty(pid, priority) < 0)
+        return 1;
+
+    // Is set priority was successful, check again for error
+    if (getPrio(pid, &newp) !=0)
+        return 1;
+
+    //Program was successful to change priority
+    out << "Priority set. \n";
+    return 0;
 }
 
 Nicer::Result Nicer::exec()
 {
     const ProcessClient process;
-    String out;
 
-    // Print header
-    out << "ID  PARENT  USER GROUP STATUS     CMD\r\n";
+    int p = 0, pid = 0, errs = 0;
 
-    // Loop processes
-    for (ProcessID pid = 0; pid < ProcessClient::MaximumProcesses; pid++)
+    p = atoi(arguments().get("PRIO"));
+    pid = atoi(arguments().get("PID"));
+
+    if (p > 5 || p < 1)
     {
-        ProcessClient::Info info;
-
-        const ProcessClient::Result result = process.processInfo(pid, info);
-        if (result == ProcessClient::Success)
-        {
-            DEBUG("PID " << pid << " state = " << *info.textState);
-
-            // Output a line
-            char line[128];
-            snprintf(line, sizeof(line),
-                    "%3d %7d %4d %5d %10s %32s\r\n",
-                     pid, info.kernelState.parent,
-                     0, 0, *info.textState, *info.command);
-            out << line;
-        }
+        ERROR("Invalid priority level")
+        return InvalidArgument;
     }
 
-    // Output the table
-    write(1, *out, out.length());
-    return Success;
+    if (!arguments().get("priority"))
+    {
+        ERROR("No valid flag found");
+        return InvalidArgument;
+    }
+
+    errs |= doNice(pid, p);
+    return errs != 0 ? Error : Success;
 }

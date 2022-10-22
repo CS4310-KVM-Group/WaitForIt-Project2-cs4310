@@ -20,32 +20,36 @@
 
 #include <POSIXApplication.h>
 
-/**
- * @addtogroup bin
- * @{
- */
+ /**
+  * @addtogroup bin
+  * @{
+  */
 
-/**
- * Output the system process list.
- */
+  /**
+   * Output the system process list.
+   */
 class Nicer : public POSIXApplication
 {
-  public:
+	public:
 
-    /**
-     * Constructor
-     *
-     * @param argc Argument count
-     * @param argv Argument values
-     */
-    Nicer(int argc, char **argv);
+		/**
+		 * Constructor
+		 *
+		 * @param argc Argument count
+		 * @param argv Argument values
+		 */
+		Nicer(int argc, char** argv);
 
-    /**
-     * Execute the application.
-     *
-     * @return Result code
-     */
-    virtual Result exec();
+		/**
+		 * Execute the application.
+		 *
+		 * @return Result code
+		 */
+		virtual Result exec();
+
+	private:
+		static int doNice(int pid, int priority);
+		static int getPrio(int pid, int* p);
 };
 
 /**
