@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BIN_RENICE_NICER_H
-#define __BIN_RENICE_NICER_H
+#ifndef __BIN_RENICE_RENICE_H
+#define __BIN_RENICE_RENICE_H
 
 #include <POSIXApplication.h>
 
@@ -28,7 +28,7 @@
   /**
    * Output the system process list.
    */
-class Nicer : public POSIXApplication
+class Renice : public POSIXApplication
 {
 	public:
 
@@ -38,7 +38,7 @@ class Nicer : public POSIXApplication
 		 * @param argc Argument count
 		 * @param argv Argument values
 		 */
-		Nicer(int argc, char** argv);
+		Renice(int argc, char** argv);
 
 		/**
 		 * Execute the application.
@@ -56,4 +56,4 @@ class Nicer : public POSIXApplication
  * @}
  */
 
-#endif /* __BIN_RENICE_NICER_H */
+#endif /* __BIN_RENICE_RENICE_H */

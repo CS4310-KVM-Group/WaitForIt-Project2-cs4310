@@ -21,10 +21,10 @@
 #include <unistd.h>
 #include <ProcessClient.h>
 #include <errno.h>
-#include "Nicer.h"
+#include "Renice.h"
 
 
-Nicer::Nicer(int argc, char **argv)
+Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Output system process list");
@@ -33,10 +33,7 @@ Nicer::Nicer(int argc, char **argv)
     parser().registerPositional("PID", "The PID of the process we want to change");
 }
 
-/**VanComment: based on ProcessList.cpp, I think this should be 
- * Nicer::Result getPrio(int pid, int* p)
- */
-Nicer::getPrio(int pid, int* p)
+Renice::getPrio(int pid, int* p)
 {
     errno = 0;
     //Checks priority of pid and returns error if invalid
@@ -50,7 +47,7 @@ Nicer::getPrio(int pid, int* p)
 }
 
 //Checks to see if priortiy need to be changed
-Nicer::doNice(int pid, int priority)
+Renice::doNice(int pid, int priority)
 {
     //old and new priority
     int oldp, newp;
@@ -72,7 +69,7 @@ Nicer::doNice(int pid, int priority)
     return 0;
 }
 
-Nicer::Result Nicer::exec()
+Renice::Result Renice::exec()
 {
     const ProcessClient process;
 
