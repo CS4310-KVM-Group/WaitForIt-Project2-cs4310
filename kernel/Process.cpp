@@ -78,15 +78,16 @@ uint Process::getWaitResult() const
     return m_waitResult;
 }
 
+/** Getter function for priority */
 int Process::getPriority()
 {
     return (int)m_priority;
 }
 
-bool Process::setPriority(int newPriority)
+/** Setter function for priority */
+void Process::setPriority(int newPriority)
 {
-    return True;
-}
+    m_priority = newPriority;
 
 Process::State Process::getState() const
 {

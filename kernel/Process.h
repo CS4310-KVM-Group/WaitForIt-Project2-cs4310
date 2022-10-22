@@ -132,7 +132,7 @@ class Process
     /**
      * Set priority function prototype declaration
     */
-    bool setPriority(int newPriority);
+    void setPriority(int newPriority);
 
     /**
      * Get process shares.
