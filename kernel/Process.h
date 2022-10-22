@@ -71,10 +71,22 @@ class Process
         Stopped
     };
 
+    /**
+     * Represent 5 different Priority levels of the Process
+     */
+    enum PriorityLevel
+    {
+      Min = 1,
+      Lower,    // = 2
+      Default,  // = 3
+      Higher,   // = 4
+      Max       // = 5
+    };
+
   public:
 
     /**
-     * Constructor function.
+     * Constructor function. 
      *
      * @param id Process Identifier
      * @param entry Initial program counter value.
@@ -111,6 +123,16 @@ class Process
      * Get wait result
      */
     uint getWaitResult() const;
+
+    /**
+     * Get priority of process
+    */
+    int getPriority();
+
+    /**
+     * Set priority function prototype declaration
+    */
+    bool setPriority(int newPriority);
 
     /**
      * Get process shares.
@@ -257,6 +279,9 @@ class Process
 
     /** Wait exit result of the other Process. */
     uint m_waitResult;
+
+    /** Priority level of the process. */
+    PriorityLevel m_priority;
 
     /** Privilege level */
     bool m_privileged;
