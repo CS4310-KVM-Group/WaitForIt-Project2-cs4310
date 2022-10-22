@@ -8,7 +8,7 @@
 - Selenya Vargas
 - Kenny Santanu
 
-### Demo Video Link: [Click Here](https://www.youtube.com/watch?v=xCxUk0Qo38c)
+### Demo Video Link: [Click Here](https://www.youtube.com)
 
 ### Repo Link: [Click Here](https://github.com/CS4310-KVM-Group/WaitForIt-Project2-cs4310/tree/priority/bin/renice)
 
@@ -16,6 +16,7 @@
 
 ### File structure
 
+```
 ProcessList class (ps command)
         |
         |
@@ -37,10 +38,7 @@ ProcessList class (ps command)
                         - getPriority() function
 
 Scheduler class (harder approach)
-
-
-
-
+```
 
 ## 2. Background
 
