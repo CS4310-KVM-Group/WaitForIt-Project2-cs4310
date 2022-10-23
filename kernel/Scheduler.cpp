@@ -64,17 +64,55 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
         return InvalidArgument;
     }
 
-    Size count = m_queue.count();
-
-    // Traverse the Queue to remove the Process
-    for (Size i = 0; i < count; i++)
+    Size min_count = m_queue_min.count();
+    Size lower_count = m_queue_lower.count();
+    Size default_count = m_queue_default.count();
+    Size higher_count = m_queue_higher.count();
+    Size max_count = m_queue_max.count();
+    // Traverse the min Queue to remove the Process
+    for (Size i = 0; i < min_count; i++)
     {
-        Process *p = m_queue.pop();
-
+        Process *p = m_queue_min.pop();
         if (p == proc)
             return Success;
         else
-            m_queue.push(p);
+            m_queue_min.push(p);
+    }
+    // Traverse the lower(2nd) Queue to remove the Process
+    for (Size i = 0; i < lower_count; i++)
+    {
+        Process *p = m_queue_lower.pop();
+        if (p == proc)
+            return Success;
+        else
+            m_queue_lower.push(p);
+    }
+    // Traverse the default Queue to remove the Process
+    for (Size i = 0; i < default_count; i++)
+    {
+        Process *p = m_queue_default.pop();
+        if (p == proc)
+            return Success;
+        else
+            m_queue_default.push(p);
+    }
+    // Traverse the higher(4th) Queue to remove the Process
+    for (Size i = 0; i < higher_count; i++)
+    {
+        Process *p = m_queue_higher.pop();
+        if (p == proc)
+            return Success;
+        else
+            m_queue_higher.push(p);
+    }
+    // Traverse the max Queue to remove the Process
+    for (Size i = 0; i < max_count; i++)
+    {
+        Process *p = m_queue_max.pop();
+        if (p == proc)
+            return Success;
+        else
+            m_queue_max.push(p);
     }
 
     FATAL("process ID " << proc->getID() << " is not in the schedule");
@@ -83,7 +121,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 
 Process * Scheduler::select()
 {
-    Process *p; 
+    Process *p;
 
     /**
      * ML Algorithm explaination:
@@ -93,6 +131,7 @@ Process * Scheduler::select()
      * - Processes at given level can run only if all queues at higher levels are empty
      * -- Example: a process at level N == 3 only after processes at level 5 and 4 terminate
     */
+
     if(m_queue_max.count() > 0){
         p = m_queue_max.pop();
         m_queue_max.push(p);
@@ -114,5 +153,6 @@ Process * Scheduler::select()
         m_queue_min.push(p);
         return p; 
     }
+    //Else
     return (Process *) NULL;
 }
