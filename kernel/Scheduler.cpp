@@ -83,13 +83,36 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 
 Process * Scheduler::select()
 {
-    if (m_queue.count() > 0)
-    {
-        Process *p = m_queue.pop();
-        m_queue.push(p);
+    Process *p; 
 
-        return p;
+    /**
+     * ML Algorithm explaination:
+     * - separate queue of processes at different priority levels N (1-lowest to 5-highest in this case)
+     * - within each level, processes are scheduled using RR (round-robin algorithm)
+     * - process at head of highest priority level (N==5) is selected for execution
+     * - Processes at given level can run only if all queues at higher levels are empty
+     * -- Example: a process at level N == 3 only after processes at level 5 and 4 terminate
+    */
+    if(m_queue_max.count() > 0){
+        p = m_queue_max.pop();
+        m_queue_max.push(p);
+        return p; 
+    }else if(m_queue_higher.count() > 0){
+        p = m_queue_higher.pop(); 
+        m_queue_higher.push(p);
+        return p; 
+    }else if(m_queue_default.count() > 0){
+        p = m_queue_default.pop(); 
+        m_queue_default.push(p);
+        return p; 
+    }else if(m_queue_lower.count() > 0){
+        p = m_queue_lower.pop(); 
+        m_queue_lower.push(p);
+        return p; 
+    }else if(m_queue_min.count() > 0 ){
+        p = m_queue_min.pop(); 
+        m_queue_min.push(p);
+        return p; 
     }
-
     return (Process *) NULL;
 }
