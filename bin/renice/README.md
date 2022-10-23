@@ -17,32 +17,38 @@
 ### File structure
 
 ```
-App Level   |ProcessList class (ps command)
+App Level   +ProcessList class (ps command)
             |   - handle/validate valid -l flag
             |   - create ProcessClient object - retrieve process info
             |   - display outputs
-            |Renice class (renice command)
+            +Renice class (renice command)
             |   - handle/validate process ID and Priority level value from user input
             |   - call setPriority() with ProcessClient object
             |   - annouce success/fail depends on result from setPriority()
             |        |
             |        |
-Lib Level   |        ProcessClient class:
-            |            - call to perform setter/getter from ProcessCtl class
-            |            - 
+Lib Level   |        +ProcessClient class:
+            |        - call to perform setter/getter from ProcessCtl class
+            |        +Process class
+            |        - setPriority() function
+            |        - getPriority() function
             |                |
             |                |
-Sys/Kernel  |                ProcessCtl class 
+Sys/Kernel  |                + ProcessCtl class 
             |                - Process point w/ default value 0 (involve Process Class)
-            |                - ProcessInfo struct pointer (involve ProcessInfo)
-            |                - ProcessManager pointer  (involve ProcessManager)
-            |                - case "Spawn"
-            |                - Spawn is in shell (which is in POSIXAPP)
-            |                        |
-            |                        |
-            |                        Process class
-            |                        - setPriority() function
-            |                        - getPriority() function
+            |                - ProcessInfo struct pointer (added int priority)
+            |                - case InfoPID updated
+            |                - case GetPriority && case RenicePID added
+            |                - Log operator updated
+            |
+            |                + Scheduler class
+            |                - enqueue(), dequeue(), and select() updated
+            |                - added 5 separate queues which represent 5 different priority levels N
+            |                      |
+            |                      |
+Micro Kernel|                      + Process Manager class
+            |                      - requeueProcess() function
+
 
 Scheduler class (harder approach)
 ```
