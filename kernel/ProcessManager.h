@@ -151,6 +151,11 @@ class ProcessManager
     Result sleep(const Timer::Info *timer = 0, const bool ignoreWakeups = false);
 
     /**
+     * Requeue Process Function Declartion Prototype
+    */
+    Result requeueProcess(Process *proc);
+
+    /**
      * Take Process out of Sleep state and mark ready for execution.
      *
      * @param proc Process pointer
