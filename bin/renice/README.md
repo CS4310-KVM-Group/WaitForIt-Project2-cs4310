@@ -17,25 +17,32 @@
 ### File structure
 
 ```
-ProcessList class (ps command)
-        |
-        |
-        ProcessClient class:
-            - renice call ProcessClient?
-            - 
-                |
-                |
-                ProcessCtl class 
-                - Process point w/ default value 0 (involve Process Class)
-                - ProcessInfo struct pointer (involve ProcessInfo)
-                - ProcessManager pointer  (involve ProcessManager)
-                - case "Spawn"
-                - Spawn is in shell (which is in POSIXAPP)
-                        |
-                        |
-                        Process class
-                        - setPriority() function
-                        - getPriority() function
+App Level   |ProcessList class (ps command)
+            |   - handle/validate valid -l flag
+            |   - create ProcessClient object - retrieve process info
+            |   - display outputs
+            |Renice class (renice command)
+            |   - handle/validate process ID and Priority level value from user input
+            |   - call setPriority() with ProcessClient object
+            |   - annouce success/fail depends on result from setPriority()
+            |        |
+            |        |
+Lib Level   |        ProcessClient class:
+            |            - call to perform setter/getter from ProcessCtl class
+            |            - 
+            |                |
+            |                |
+Sys/Kernel  |                ProcessCtl class 
+            |                - Process point w/ default value 0 (involve Process Class)
+            |                - ProcessInfo struct pointer (involve ProcessInfo)
+            |                - ProcessManager pointer  (involve ProcessManager)
+            |                - case "Spawn"
+            |                - Spawn is in shell (which is in POSIXAPP)
+            |                        |
+            |                        |
+            |                        Process class
+            |                        - setPriority() function
+            |                        - getPriority() function
 
 Scheduler class (harder approach)
 ```
