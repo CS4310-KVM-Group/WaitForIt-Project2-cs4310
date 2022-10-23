@@ -48,8 +48,8 @@ class Renice : public POSIXApplication
 		virtual Result exec();
 
 	private:
-		static int doNice(int pid, int priority);
-		static int getPrio(int pid, int* p);
+		int doNice(int pid, int priority);
+		int getPrio(int pid, int* p);
 };
 
 /**

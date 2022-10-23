@@ -18,10 +18,12 @@
 #include <Types.h>
 #include <Macros.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <ProcessClient.h>
 #include <errno.h>
 #include "Renice.h"
+#include <sys/renice.h> // should added lib/libposix/sys/renice/renicePID.cpp but not recognize
 
 
 Renice::Renice(int argc, char **argv)
@@ -33,11 +35,15 @@ Renice::Renice(int argc, char **argv)
     parser().registerPositional("PID", "The PID of the process we want to change");
 }
 
-Renice::getPrio(int pid, int* p)
+int Renice::getPrio(int pid, int* p)
 {
+    const ProcessClient process;
+    ProcessClient::Info info;
+    process.processInfo(pid, info);
+
     errno = 0;
     //Checks priority of pid and returns error if invalid
-    *p = getPriority(pid);
+    *p = info.kernelState.priority;
     if (*p == -1 && errno)
     {
         WARNING("Failed to get priority");
@@ -47,8 +53,10 @@ Renice::getPrio(int pid, int* p)
 }
 
 //Checks to see if priortiy need to be changed
-Renice::doNice(int pid, int priority)
+int Renice::doNice(int pid, int priority)
 {
+    int status;
+
     //old and new priority
     int oldp, newp;
 
@@ -57,7 +65,7 @@ Renice::doNice(int pid, int priority)
         return 1;
 
     //Sets priority and checks for error
-    if (setPriorty(pid, priority) < 0)
+    if (renicepid(pid, &status, newp, 0) < 0)
         return 1;
 
     // Is set priority was successful, check again for error
@@ -65,16 +73,14 @@ Renice::doNice(int pid, int priority)
         return 1;
 
     //Program was successful to change priority
-    out << "Priority set. \n";
+    printf("Priority set. \n");
     return 0;
 }
 
 Renice::Result Renice::exec()
 {
-    const ProcessClient process;
-
     int p = 0, pid = 0, errs = 0;
-
+    
     p = atoi(arguments().get("PRIO"));
     pid = atoi(arguments().get("PID"));
 
@@ -91,5 +97,6 @@ Renice::Result Renice::exec()
     }
 
     errs |= doNice(pid, p);
-    return errs != 0 ? Error : Success;
+    //return errs != 0 ? Error : Success; // what kind of ternary operation is this?
+    return Success; // temporary fix. Delete this line after fixing above line
 }
