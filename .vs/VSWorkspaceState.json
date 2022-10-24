@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\kernel",
+    "\\kernel\\API",
+    "\\lib",
+    "\\lib\\libposix",
+    "\\lib\\libposix\\sys"
   ],
-  "SelectedNode": "\\C:\\Users\\kenny\\Source\\Repos\\WaitForIt-Project2-cs4310",
   "PreviewInSolutionExplorer": false
 }

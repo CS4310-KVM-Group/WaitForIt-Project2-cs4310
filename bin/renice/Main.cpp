@@ -15,10 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Nicer.h"
+#include "Renice.h"
 
 int main(int argc, char **argv)
 {
-    Nicer app(argc, argv);
+    Renice app(argc, argv);
     return app.run();
 }
