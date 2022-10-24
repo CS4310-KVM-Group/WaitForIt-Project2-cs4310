@@ -7,25 +7,21 @@
 #include "sys/types.h"
 #include <errno.h>
 
-pid_t renicepid(pid_t pid, int *stat_loc, int newPriority, int options)
+int renicepid(ProcessID pid, int newPriority)
 {
-    const ulong result = (ulong) ProcessCtl(pid, RenicePID);
+    ProcessClient process;
 
-    switch ((const API::Result) (result & 0xffff))
+    switch ((const API::Result) (process.setPriority(pid, newPriority) & 0xffff))
     {
         case API::NotFound:
             errno = ESRCH;
-            return (pid_t) -1;
+            return -1; 
 
         case API::Success:
-            if (stat_loc)
-            {
-                *stat_loc = result >> 16;
-            }
-            return pid;
+            return 0;
 
         default:
             errno = EIO;
-            return (pid_t) -1;
+            return -1;
     }
 }

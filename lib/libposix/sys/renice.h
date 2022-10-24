@@ -19,6 +19,7 @@
 #define __LIBPOSIX_RENICE_H
 
 #include <Macros.h>
+#include <ProcessClient.h>
 #include "types.h"
 
 /**
@@ -55,7 +56,7 @@
  *
  * @return Process ID of the child on success or -1 on error
  */
-extern C pid_t renicepid(pid_t pid, int *stat_loc, int newPriority, int options);
+extern C int renicepid(ProcessID pid, int newPriority);
 
 /**
  * @}

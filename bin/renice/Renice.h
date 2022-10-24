@@ -19,6 +19,7 @@
 #define __BIN_RENICE_RENICE_H
 
 #include <POSIXApplication.h>
+#include <sys/renice.h>
 
  /**
   * @addtogroup bin

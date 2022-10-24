@@ -55,7 +55,7 @@ int Renice::getPrio(int pid, int* p)
 //Checks to see if priortiy need to be changed
 int Renice::doNice(int pid, int priority)
 {
-    int status;
+    
 
     //old and new priority
     int oldp, newp;
@@ -65,7 +65,7 @@ int Renice::doNice(int pid, int priority)
         return 1;
 
     //Sets priority and checks for error
-    if (renicepid(pid, &status, newp, 0) < 0)
+    if (renicepid((ProcessID) pid, priority) != 0)
         return 1;
 
     // Is set priority was successful, check again for error
@@ -97,6 +97,7 @@ Renice::Result Renice::exec()
     }
 
     errs |= doNice(pid, p);
-    //return errs != 0 ? Error : Success; // what kind of ternary operation is this?
-    return Success; // temporary fix. Delete this line after fixing above line
+    //If we dont have it, itll always return success, but if it errors out we get an error
+    return errs != 0 ? IOError : Success; 
+  
 }

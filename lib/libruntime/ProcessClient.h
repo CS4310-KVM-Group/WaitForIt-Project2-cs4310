@@ -108,7 +108,7 @@ class ProcessClient
      */
     Result processInfo(const String program, Info &info) const;
 
-    void setPriority(ProcessID pid, int newPriority);
+    API::Result setPriority(ProcessID pid, int newPriority);
 
     /**
      * Find a process by its program name.

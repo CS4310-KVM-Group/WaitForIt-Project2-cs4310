@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\bin",
-    "\\bin\\renice"
+    "\\kernel",
+    "\\kernel\\API",
+    "\\lib",
+    "\\lib\\libposix",
+    "\\lib\\libposix\\sys"
   ],
-  "SelectedNode": "\\bin\\renice\\Nicer.h",
   "PreviewInSolutionExplorer": false
 }
