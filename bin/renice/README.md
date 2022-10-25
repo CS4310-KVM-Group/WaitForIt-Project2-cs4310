@@ -8,7 +8,7 @@
 - Selenya Vargas
 - Kenny Santanu
 
-### Demo Video Link: [Click Here](https://www.youtube.com)
+### Demo Video Link: [Click Here](https://www.youtube.com/watch?v=AR8SsyeNROE&ab_channel=Semava)
 
 ### Repo Link: [Click Here](https://github.com/CS4310-KVM-Group/WaitForIt-Project2-cs4310/tree/priority/bin/renice)
 
@@ -80,7 +80,7 @@ in FreeNos...
 
 - add -l flag for ps command to show priority of all current processes
 - add renice commands, given a specific process id (PID) --> change priority of specific process
-- implement priority queue of process
+- implement 5 priority queues of process (support Multilevel Scheduling)
     + setter function to change priority of process within a queue
     + getter function to return priority of process
     
